@@ -18,7 +18,9 @@ client = OpenAI(
 
 EMBEDDING_MODEL = "openai/text-embedding-3-small"
 PROJECT_DIR = Path(__file__).resolve().parent
-CHROMA_PATH = PROJECT_DIR / "chroma_db"
+CHROMA_PATH = Path(
+    os.getenv("CHROMA_PATH", str(PROJECT_DIR / "chroma_db"))
+)
 COLLECTION_NAME = "morocco_guide"
 
 

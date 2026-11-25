@@ -3,10 +3,27 @@ from llm import chat_with_user
 from embedding import search
 from dotenv import load_dotenv
 import os
+import secrets
 
 load_dotenv()
 
 app = Flask(__name__)
+
+@app.before_request
+def protect_chat():
+    if request.path != "/chat":
+        return None
+
+    token = os.getenv("CHAT_API_KEY")
+
+    if not token:
+        return jsonify(error="Chat access is not configured."), 503
+
+    provided = request.headers.get("Authorization", "")
+    expected = f"Bearer {token}"
+
+    if not secrets.compare_digest(provided, expected):
+        return jsonify(error="Unauthorized"), 401
 
 @app.route('/')
 def index():

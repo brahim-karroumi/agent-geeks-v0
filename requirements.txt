@@ -12,3 +12,5 @@ dnspython
 chromadb
 
 flask
+
+gunicorn
