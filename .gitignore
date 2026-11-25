@@ -1,0 +1,18 @@
+# Secrets / credentials
+.env
+credentials.json
+token.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Local / IDE
+.vscode/
+.idea/
+
+# Vector DB / local data
+chroma_db/
